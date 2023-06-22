@@ -1,0 +1,26 @@
+{
+  "name": "file-manager",
+  "version": "1.0.0",
+  "description": "RS School task",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js -- --username=your_username",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EXisTAnZ/file-manager.git"
+  },
+  "keywords": [
+    "file",
+    "manager",
+    "node",
+    "node.js"
+  ],
+  "author": "Oziev Magomed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EXisTAnZ/file-manager/issues"
+  },
+  "homepage": "https://github.com/EXisTAnZ/file-manager#readme"
+}
