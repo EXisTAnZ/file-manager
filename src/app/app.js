@@ -1,15 +1,17 @@
 import { homedir } from 'os';
 import { createInterface } from 'readline/promises';
+import Commander from './commander.js';
 
 class App {
   constructor(args) {
-    this.cwd = homedir();
+    this.curDir = homedir();
     this.userName = this.parseUserName(args);
+    this.commander = new Commander(this.curDir);
   }
 
   start() {
     console.log(`Welcome to the File Manager, ${this.userName}!`);
-    console.log(`You are currently in ${this.cwd}`);
+    console.log(`You are currently in ${this.curDir}`);
     const readLine = createInterface({
       input: process.stdin,
       output: process.stdout
@@ -17,8 +19,8 @@ class App {
 
     readLine.on('line', (input) => {
       if (input.startsWith('.exit ') || input ==='.exit') this.stop();
-      console.log(`Command: ${input}`);
-      console.log(`You are currently in ${this.cwd}`);
+      console.log(`You are currently in ${this.curDir}`);
+      this.commander.exec(input);
     });
     readLine.on('close', () => {
       this.stop();
