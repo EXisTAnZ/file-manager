@@ -19,7 +19,6 @@ class App {
 
     readLine.on('line', (input) => {
       if (input.startsWith('.exit ') || input ==='.exit') this.stop();
-      console.log(`You are currently in ${this.curDir}`);
       this.commander.exec(input);
     });
     readLine.on('close', () => {

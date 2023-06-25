@@ -1,19 +1,21 @@
+import { changeDir } from "./fs/changeDir.js";
+
 class Commander {
   
   constructor(curDir) {
     this.curDir = curDir;
   }
 
-  exec(input) {
+  async exec(input) {
     const { command, args } = this.parseInput(input);
     console.log(command, args);
     
     switch (command) {
       case 'up':
-        console.log(`Need implement ${command} command!`);
+        this.curDir = await changeDir(this.curDir, '../');
         break;
       case 'cd':
-        console.log(`Need implement ${command} command!`);
+        this.curDir = await changeDir(this.curDir, args[0]);
         break;
       case 'ls':
         console.log(`Need implement ${command} command!`);
@@ -53,6 +55,7 @@ class Commander {
       default:
         console.log('Invalid input');
     }
+    console.log(`You are currently in ${this.curDir}`);
   }
 
   parseInput(input) {
