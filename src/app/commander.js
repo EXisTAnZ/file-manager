@@ -1,4 +1,5 @@
-import { changeDir } from "./fs/changeDir.js";
+import changeDir from "./fs/changeDir.js";
+import list from "./fs/list.js";
 
 class Commander {
   
@@ -18,7 +19,7 @@ class Commander {
         this.curDir = await changeDir(this.curDir, args[0]);
         break;
       case 'ls':
-        console.log(`Need implement ${command} command!`);
+        await list(this.curDir);
         break;
       case 'cat':
         console.log(`Need implement ${command} command!`);

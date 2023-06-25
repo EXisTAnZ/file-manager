@@ -1,7 +1,7 @@
 import { resolve } from 'path';
 import { pathExist } from './pathExist.js';
 
-export async function changeDir(curDir, destDir) {
+export default async function changeDir(curDir, destDir) {
   if (!destDir) {
     return curDir;
   }
