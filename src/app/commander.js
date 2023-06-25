@@ -1,5 +1,6 @@
 import changeDir from "./fs/changeDir.js";
 import list from "./fs/list.js";
+import read from "./fs/read.js";
 
 class Commander {
   
@@ -22,7 +23,7 @@ class Commander {
         await list(this.curDir);
         break;
       case 'cat':
-        console.log(`Need implement ${command} command!`);
+        await read(this.curDir, args[0]);
         break;
       case 'add':
         console.log(`Need implement ${command} command!`);
@@ -71,3 +72,4 @@ class Commander {
   }
 
   export default Commander;
+  
