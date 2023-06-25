@@ -1,13 +1,14 @@
 import { resolve } from 'path';
+import { pathExist } from './pathExist.js';
 
 export async function changeDir(curDir, destDir) {
   if (!destDir) {
     return curDir;
   }
 
-const newPath = resolve(curDir, destDir);
+  const newDir = resolve(curDir, destDir);
 
-  // TODO: need implement path check;
-
-  return newPath;
+  if (await pathExist(newDir)) return newDir;
+  console.log('Invalid input. Check destnation path');
+  return curDir;
 }
