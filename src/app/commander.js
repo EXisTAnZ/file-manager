@@ -1,3 +1,5 @@
+import compress from "./arch/compress.js";
+import decompress from "./arch/decompress.js";
 import add from "./fs/add.js";
 import changeDir from "./fs/changeDir.js";
 import copy from "./fs/copy.js";
@@ -6,7 +8,7 @@ import list from "./fs/list.js";
 import move from "./fs/move.js";
 import read from "./fs/read.js";
 import rename from "./fs/rename.js";
-import { hash } from "./hash/hash.js";
+import hash from "./hash/hash.js";
 import osInfo from "./os/os.js";
 
 class Commander {
@@ -54,17 +56,20 @@ class Commander {
         await hash(this.curDir, args[0]);
         break;
       case 'compress':
-        console.log(`Need implement ${command} command!`);
-         break;
+        await compress(this.curDir, args[0], args[1]);
+        break;
       case 'decompress':
-        console.log(`Need implement ${command} command!`);
+        await decompress(this.curDir, args[0], args[1]);
         break;
       case '':
         break;
       default:
         console.log('Invalid input. Unknown Command!');
     }
-    console.log(`You are currently in ${this.curDir}`);
+    setTimeout(() => {
+      console.log(`You are currently in ${this.curDir}`);
+    }, 200);
+    
   }
 
   parseInput(input) {

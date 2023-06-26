@@ -2,7 +2,7 @@ import fs from 'fs/promises';
 import { resolve } from 'path';
 import { createHash } from 'crypto';
 
-export async function hash(curDir, fileName) {
+export default async function hash(curDir, fileName) {
   if (!fileName) {
     console.log('Invalid input. Try to use: hash path_to_file');
     return;
