@@ -11,7 +11,7 @@ export default function osInfo(param){
       console.log(JSON.stringify(os.EOL));
       break;
     case '--cpus':
-      console.log(os.cpus());
+      console.table(os.cpus().map(item => ({ model: item.model, speed: `${item.speed/1000}GHz` })));
       break;
     case '--homedir':
       console.log(os.homedir());
