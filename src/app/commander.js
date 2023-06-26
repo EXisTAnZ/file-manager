@@ -1,7 +1,9 @@
 import add from "./fs/add.js";
 import changeDir from "./fs/changeDir.js";
 import copy from "./fs/copy.js";
+import remove from "./fs/delete.js";
 import list from "./fs/list.js";
+import move from "./fs/move.js";
 import read from "./fs/read.js";
 import rename from "./fs/rename.js";
 
@@ -38,10 +40,10 @@ class Commander {
         await copy(this.curDir, args[0], args[1]);
         break;
       case 'mv':
-        console.log(`Need implement ${command} command!`);
+        await move(this.curDir, args[0], args[1]);
         break;
       case 'rm':
-        console.log(`Need implement ${command} command!`);
+        await remove(this.curDir, args[0]);
         break;
       case 'os':
         console.log(`Need implement ${command} command!`);
