@@ -6,6 +6,7 @@ import list from "./fs/list.js";
 import move from "./fs/move.js";
 import read from "./fs/read.js";
 import rename from "./fs/rename.js";
+import { hash } from "./hash/hash.js";
 import osInfo from "./os/os.js";
 
 class Commander {
@@ -50,7 +51,7 @@ class Commander {
         osInfo(args[0]);
         break;
       case 'hash':
-        console.log(`Need implement ${command} command!`);
+        await hash(this.curDir, args[0]);
         break;
       case 'compress':
         console.log(`Need implement ${command} command!`);
