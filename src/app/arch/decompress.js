@@ -21,14 +21,8 @@ export default async function decompress(curDir, filePath, destPath) {
 
     const brotli = createBrotliDecompress();
 
-    readStream.pipe(brotli).pipe(outStream);
-
     brotli.on('error', () => {
       reject("Operation failed. Unable to decompress");
-    })
-
-    outStream.on('close', () => {
-      resolve('File was decompressed');
     })
     readStream.on('error', (err) => {
       reject('Operation failed. Cant reach source file.');
@@ -36,6 +30,10 @@ export default async function decompress(curDir, filePath, destPath) {
     outStream.on('error', (err) => {
       reject(`Operation failed. ${err.code === 'EEXIST' ? 'File already exists.' : ''} `);
     })
+    outStream.on('close', () => {
+      resolve('File was decompressed');
+    })
+    readStream.pipe(brotli).pipe(outStream);
   })
   compressPromise
     .then(msg => console.log(msg))

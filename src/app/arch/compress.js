@@ -1,6 +1,7 @@
 import { createReadStream, createWriteStream } from 'fs';
 import { resolve } from 'path';
 import { createBrotliCompress } from 'zlib';
+import { pathExist } from '../fs/pathExist.js';
 
 export default async function compress(curDir, filePath, destPath) {
   if (!filePath || !destPath) {
@@ -20,14 +21,8 @@ export default async function compress(curDir, filePath, destPath) {
 
     const brotli = createBrotliCompress();
 
-    readStream.pipe(brotli).pipe(outStream);
-
     brotli.on('error', () => {
       reject("Operation failed. Unable to compress");
-    })
-
-    outStream.on('close', () => {
-      resolve('File was compressed');
     })
     readStream.on('error', (err) => {
       reject('Operation failed. Cant reach source file.');
@@ -35,6 +30,11 @@ export default async function compress(curDir, filePath, destPath) {
     outStream.on('error', (err) => {
       reject(`Operation failed. ${err.code === 'EEXIST' ? 'File already exists' : ''} `);
     })
+    outStream.on('close', () => {
+      resolve('File was compressed');
+    })
+
+    readStream.pipe(brotli).pipe(outStream);
   })
   compressPromise
     .then(msg => console.log(msg))
