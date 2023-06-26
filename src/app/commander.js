@@ -19,7 +19,6 @@ class Commander {
 
   async exec(input) {
     const { command, args } = this.parseInput(input);
-    console.log(command, args);
     
     switch (command) {
       case 'up':
@@ -68,7 +67,7 @@ class Commander {
     }
     setTimeout(() => {
       console.log(`You are currently in ${this.curDir}`);
-    }, 200);
+    }, 300);
     
   }
 
