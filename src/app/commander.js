@@ -1,3 +1,4 @@
+import add from "./fs/add.js";
 import changeDir from "./fs/changeDir.js";
 import list from "./fs/list.js";
 import read from "./fs/read.js";
@@ -26,7 +27,7 @@ class Commander {
         await read(this.curDir, args[0]);
         break;
       case 'add':
-        console.log(`Need implement ${command} command!`);
+        await add(this.curDir, args[0]);
         break;
       case 'rn':
         console.log(`Need implement ${command} command!`);
@@ -55,7 +56,7 @@ class Commander {
       case '':
         break;
       default:
-        console.log('Invalid input');
+        console.log('Invalid input. Unknown Command!');
     }
     console.log(`You are currently in ${this.curDir}`);
   }
@@ -72,4 +73,3 @@ class Commander {
   }
 
   export default Commander;
-  
