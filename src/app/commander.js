@@ -6,6 +6,7 @@ import list from "./fs/list.js";
 import move from "./fs/move.js";
 import read from "./fs/read.js";
 import rename from "./fs/rename.js";
+import osInfo from "./os/os.js";
 
 class Commander {
   
@@ -46,7 +47,7 @@ class Commander {
         await remove(this.curDir, args[0]);
         break;
       case 'os':
-        console.log(`Need implement ${command} command!`);
+        osInfo(args[0]);
         break;
       case 'hash':
         console.log(`Need implement ${command} command!`);
