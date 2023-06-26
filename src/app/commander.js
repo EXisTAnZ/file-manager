@@ -1,15 +1,8 @@
 import compress from "./arch/compress.js";
 import decompress from "./arch/decompress.js";
-import add from "./fs/add.js";
-import changeDir from "./fs/changeDir.js";
-import copy from "./fs/copy.js";
-import remove from "./fs/delete.js";
-import list from "./fs/list.js";
-import move from "./fs/move.js";
-import read from "./fs/read.js";
-import rename from "./fs/rename.js";
 import hash from "./hash/hash.js";
 import osInfo from "./os/os.js";
+import filesModule from "./fs/file.module.js";
 
 class Commander {
   
@@ -22,31 +15,31 @@ class Commander {
     
     switch (command) {
       case 'up':
-        this.curDir = await changeDir(this.curDir, '../');
+        this.curDir = await filesModule.changeDir(this.curDir, '../');
         break;
       case 'cd':
-        this.curDir = await changeDir(this.curDir, args[0]);
+        this.curDir = await filesModule.changeDir(this.curDir, args[0]);
         break;
       case 'ls':
-        await list(this.curDir);
+        await filesModule.list(this.curDir);
         break;
       case 'cat':
-        await read(this.curDir, args[0]);
+        await filesModule.read(this.curDir, args[0]);
         break;
       case 'add':
-        await add(this.curDir, args[0]);
+        await filesModule.add(this.curDir, args[0]);
         break;
       case 'rn':
-        await rename(this.curDir, args[0], args[1]);
+        await filesModule.rename(this.curDir, args[0], args[1]);
         break;
       case 'cp':
-        await copy(this.curDir, args[0], args[1]);
+        await filesModule.copy(this.curDir, args[0], args[1]);
         break;
       case 'mv':
-        await move(this.curDir, args[0], args[1]);
+        await filesModule.move(this.curDir, args[0], args[1]);
         break;
       case 'rm':
-        await remove(this.curDir, args[0]);
+        await filesModule.remove(this.curDir, args[0]);
         break;
       case 'os':
         osInfo(args[0]);
@@ -68,7 +61,7 @@ class Commander {
     setTimeout(() => {
       console.log(`You are currently in ${this.curDir}`);
     }, 300);
-    
+
   }
 
   parseInput(input) {
