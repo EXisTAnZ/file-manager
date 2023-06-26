@@ -2,6 +2,7 @@ import add from "./fs/add.js";
 import changeDir from "./fs/changeDir.js";
 import list from "./fs/list.js";
 import read from "./fs/read.js";
+import rename from "./fs/rename.js";
 
 class Commander {
   
@@ -30,7 +31,7 @@ class Commander {
         await add(this.curDir, args[0]);
         break;
       case 'rn':
-        console.log(`Need implement ${command} command!`);
+        await rename(this.curDir, args[0], args[1]);
         break;
       case 'cp':
         console.log(`Need implement ${command} command!`);
