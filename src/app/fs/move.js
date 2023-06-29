@@ -13,7 +13,7 @@ export default async function move(curDir, filePath, dirPath) {
     const readStream = fs.createReadStream(oldPath);
     const writeStream = fs.createWriteStream(newPath, { flags: 'wx' });
 
-    readStream.pipe(writeStream);
+
     writeStream.on('close', () => {
       fs.promises.rm(oldPath)
       .then()
@@ -27,6 +27,7 @@ export default async function move(curDir, filePath, dirPath) {
     writeStream.on('error', (err) => {
       reject(`Operation failed. ${ err.code === 'EEXIST' ? 'File already exists' : '' } `);
     });
+    readStream.pipe(writeStream);
   });
   copyPromise
     .then(msg => console.log(msg))

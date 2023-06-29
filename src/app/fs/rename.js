@@ -1,5 +1,5 @@
 import fs from 'fs/promises'
-import { resolve } from 'path';
+import { parse, resolve } from 'path';
 import { pathExist } from './pathExist.js'; 
 
 export default async function rename(curDir, filePath, newFileName) {
@@ -8,7 +8,8 @@ export default async function rename(curDir, filePath, newFileName) {
     return;
   }
   const oldPath = resolve(curDir, filePath);
-  const newPath = resolve(curDir, newFileName);
+  const oldDir = parse(oldPath).dir;
+  const newPath = resolve(oldDir, newFileName);
   if (await pathExist(newPath)) {
     console.log('Operation failed. File is already exist');
     return;
